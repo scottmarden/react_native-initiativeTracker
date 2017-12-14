@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FlatList, SectionList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, Keyboard, SectionList, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default class App extends React.Component {
   constructor(props){
@@ -7,12 +7,20 @@ export default class App extends React.Component {
     this.state = {
       text: '',
       list: [],
+      myNumber: 42,
     };
   }
   render() {
     return (
       <View style={styles.wrapper}>
+        {/* Number/roll selector - Needs improving */}
         <View style={styles.container}>
+          <TextInput
+          style={styles.nameInput}
+          keyboardType='numeric'
+          placeholder="Enter number"
+          /> 
+          {/* Name/Character input - Keyboard functionality needs cleaning(minimize) */}
           <TextInput 
             style={styles.nameInput}
             onChangeText={(text) => this.setState({text})}
@@ -22,7 +30,7 @@ export default class App extends React.Component {
           <Button 
             style={styles.button}
             onPress={() => {
-              let list = this.state.list
+              let list = this.state.list.slice()
               list.push({key: this.state.text})
               this.setState({list: list})
               this.setState({text: ''})
